@@ -1,4 +1,5 @@
 import { argv } from "process";
+import { crawlPage } from "./crawl.js";
 
 function main() {
   if (argv.length < 3) {
@@ -13,6 +14,8 @@ function main() {
 
   const baseURL = argv[2];
   console.log(`crawler starting with at url ${baseURL}`);
+
+  crawlPage(baseURL);
 }
 
 main();

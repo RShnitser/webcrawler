@@ -21,4 +21,26 @@ function getURLsFromHTML(htmlBody, baseURL) {
   return result;
 }
 
-export { normailizeUrl, getURLsFromHTML };
+async function crawlPage(currentURL) {
+  try {
+    const response = await fetch(currentURL);
+    if (!response.ok) {
+      console.error("invalid response");
+      return;
+    }
+
+    if (
+      !response.headers.get("content-type") ||
+      !response.headers.get("content-type").includes("text/html")
+    ) {
+      console.error("invalid header");
+      return;
+    }
+    const text = await response.text();
+    console.log(text);
+  } catch (e) {
+    console.error(e.message);
+  }
+}
+
+export { normailizeUrl, getURLsFromHTML, crawlPage };
