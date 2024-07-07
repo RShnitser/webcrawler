@@ -1,7 +1,7 @@
 import { argv } from "process";
 import { crawlPage } from "./crawl.js";
 
-function main() {
+async function main() {
   if (argv.length < 3) {
     console.error("please provide a website");
     return;
@@ -15,7 +15,8 @@ function main() {
   const baseURL = argv[2];
   console.log(`crawler starting with at url ${baseURL}`);
 
-  crawlPage(baseURL);
+  const pages = await crawlPage(baseURL);
+  console.log(pages);
 }
 
 main();
